@@ -31,11 +31,11 @@ struct LocaleKeys {
     }
 
     enum TabView: String {
-        case home = "tabHome"
-        case market = "tabMarket"
-        case create = "tabCreate"
-        case wishlist = "tabWishlist"
-        case account = "tabAccount"
+        case feedView = "feedWiew"
+        case explore = "explore"
+        case uploadThread = "uploadThread"
+        case activity = "activity"
+        case profile = "profile"
     }
 }
 

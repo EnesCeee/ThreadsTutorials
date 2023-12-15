@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EditProfileView: View {
     @State private var bio = ""
     @State private var link = ""
     @State private var isPrivateProfile = false
-
+    @Environment(\.dismiss) var dismiss
+    @StateObject private var viewModel = EditProfileViewModel()
     
     var body: some View {
         NavigationStack{
@@ -31,8 +33,18 @@ struct EditProfileView: View {
                         }
                         .font(.footnote)
                         Spacer()
-
-                        CircularProfileImageView()
+                        PhotosPicker(selection: $viewModel.selectedItem) {
+                            if let image = viewModel.profileImage{
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                            } else {
+                                CircularProfileImageView()
+                            }
+                        }
+                        
                     }
                     Divider()
                     
@@ -55,6 +67,8 @@ struct EditProfileView: View {
                     .font(.footnote)
                     Divider()
                     Toggle("Private profile", isOn: $isPrivateProfile)
+                    
+                    
                 }
                 .font(.footnote)
                 .padding()
@@ -66,28 +80,34 @@ struct EditProfileView: View {
                 }
                 .padding()
                 
-           
+                
             }
             .navigationTitle("Edit Profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {
+                        dismiss()
+                    }, label: {
                         Text("Cancel")
                             .font(.subheadline)
                             .foregroundStyle(.black)
                     })
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {
+                        Task {
+                            try await viewModel.updateUserData()
+                            dismiss()
+                        }
+                    }, label: {
                         Text("Done")
                             .font(.subheadline)
                             .fontWeight(.semibold)
                             .foregroundStyle(.black)
                     })
                 }
-        }
-       
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ struct HomeTabItem: Identifiable {
         HomeTabItem(page: AnyView(ExploreView()), model: TabModel(id: 1, title: .explore, icon: .explore)),
         HomeTabItem(page: AnyView(Text("")), model: TabModel(id: 2, title: .uploadThread, icon: .uploadThread)),
         HomeTabItem(page: AnyView(ActivityView()), model: TabModel(id: 3, title: .activity, icon: .activity)),
-        HomeTabItem(page: AnyView(ProfileView()), model: TabModel(id: 4, title: .profile, icon: .profile))
+        HomeTabItem(page: AnyView(CurrentUserProfileView()), model: TabModel(id: 4, title: .profile, icon: .profile))
     ]
 }
 

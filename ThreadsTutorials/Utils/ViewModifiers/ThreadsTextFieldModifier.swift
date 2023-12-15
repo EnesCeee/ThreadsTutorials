@@ -11,6 +11,7 @@ import SwiftUI
 struct ThreadsTextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
+            .textInputAutocapitalization(TextInputAutocapitalization.never)
             .padding()
             .font(.subheadline)
             .background(Color(.systemGray6))

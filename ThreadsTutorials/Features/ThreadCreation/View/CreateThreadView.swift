@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct CreateThreadView: View {
+    @StateObject private var viewModel = CreateThreadViewModel()
     @State private var caption = ""
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
+    
+    private var user : UserModel?{
+        return UserService.shared.currentUser
+    }
     
     var body: some View {
         NavigationStack {
             VStack{
                 HStack(alignment: .top){
-                    CircularProfileImageView()
+                    CircularProfileImageView(user: user, size: .small)
                     VStack(alignment: .leading, spacing: 4){
-                        Text("maxverstappen1")
+                        Text(user?.username ?? "")
                             .fontWeight(.semibold)
                         
                         TextField("Start a thread...", text: $caption, axis: .vertical)
@@ -27,7 +32,9 @@ struct CreateThreadView: View {
                     Spacer()
                     
                     if !caption.isEmpty{
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Button(action: {
+                            caption = ""
+                        }, label: {
                             Image(systemName: "xmark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
@@ -40,7 +47,7 @@ struct CreateThreadView: View {
             .padding()
             .navigationTitle("New Thread")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
+            .toolbar{
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
                         dismiss()
@@ -51,7 +58,11 @@ struct CreateThreadView: View {
                     })
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {
+                        Task{try await viewModel.uploadThread(caption: caption)
+                            dismiss()
+                        }
+                    }, label: {
                         Text("Post")
                             .opacity(caption.isEmpty ? 0.5 : 1.0)
                             .disabled(caption.isEmpty)

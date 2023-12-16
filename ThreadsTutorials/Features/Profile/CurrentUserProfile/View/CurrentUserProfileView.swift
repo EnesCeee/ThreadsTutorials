@@ -36,13 +36,16 @@ struct CurrentUserProfileView: View {
                         })
                         
                         //user content list view
-                        UserContentListView()
+                        if let user = currentUser{
+                            UserContentListView(user: user)
+                        }
 
                     }
                 }
                 .sheet(isPresented: $showEditProfile, content: {
-                    EditProfileView()
-                        .environmentObject(viewModel)
+                    if let user = currentUser{
+                        EditProfileView(user: user)
+                    }
                 })
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing) {

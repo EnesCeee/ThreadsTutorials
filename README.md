@@ -54,7 +54,7 @@ Create a new test target in Xcode, add test files to the "test" folder, and writ
 [CocoaPods](https://cocoapods.org) is used as a dependency manager.
 List of dependencies: 
 * `pod 'Firebase'`: Networking library for global message delivery.
-* `pod 'Kingfisher'`: Authorization library, critical for users outside the company.
+* `pod 'Kingfisher'`: It provides you a chance to use a pure-Swift way to work with remote images.
 
 # Workflow
 * Reporting bugs: Report issues on the GitHub repository.

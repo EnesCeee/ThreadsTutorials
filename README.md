@@ -27,9 +27,6 @@ This project is an excellent starting point for developers looking to explore iO
 6. Review the code to understand the implementation.<br>
 7. Run the project, and you should see the application in action.<br>
 
-
-Note: DEV and PROD environments are <strong>NOT OPERATIONAL</strong> on Fridays from 00:00 - 01:00 GMT due to server maintenance.
-
 # Usage
 To send a message globally, log in with the provided credentials.
 

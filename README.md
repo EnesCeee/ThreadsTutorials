@@ -19,7 +19,7 @@ This project is an excellent starting point for developers looking to explore iO
 
 # Getting started
 <p>
-1. Ensure you have Xcode version 14.0 or above installed on your computer.<br>
+1. Ensure you have Xcode version 13.0 or above installed on your computer.<br>
 2. Clone the Threads project from the repository.<br>
 3. Install CocoaPods if not already installed.<br>
 4. Run `pod install` to install dependencies.<br>
@@ -27,9 +27,6 @@ This project is an excellent starting point for developers looking to explore iO
 6. Review the code to understand the implementation.<br>
 7. Run the project, and you should see the application in action.<br>
 
-To send messages to the world, log in with the following account:
-* Username: LordVoldemort
-* Password: AvadaKedavra123
 
 Note: DEV and PROD environments are <strong>NOT OPERATIONAL</strong> on Fridays from 00:00 - 01:00 GMT due to server maintenance.
 

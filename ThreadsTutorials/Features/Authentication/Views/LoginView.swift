@@ -9,17 +9,15 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
-    
+
     var body: some View {
-        NavigationStack
-        {
+        NavigationStack {
             VStack {
                 Spacer()
                 Image("ic_app_threads")
                     .resizable()
                     .frame(width: 120, height: 120)
-                VStack
-                {
+                VStack {
                     TextField("Enter your email", text: $viewModel.email)
                         .autocapitalization(.none)
                         .modifier(ThreadsTextFieldModifier())
@@ -28,19 +26,18 @@ struct LoginView: View {
 
                 }
                 .padding()
-                NavigationLink
-                {
+                NavigationLink {
                     Text("Forgot Password?")
                 } label: {
                     Text("Forgot Password?")
                         .font(.footnote)
                         .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity, alignment:.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.trailing, 28)
                         .foregroundColor(.black)
                 }
                 Button(action: {
-                    Task{ try await viewModel.loginUser()}
+                    Task { try await viewModel.loginUser()}
                 }, label: {
                     Text("Login")
                         .frame(maxWidth: .infinity, minHeight: 50)

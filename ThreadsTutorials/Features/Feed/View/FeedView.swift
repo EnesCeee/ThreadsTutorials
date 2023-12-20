@@ -9,8 +9,7 @@ import SwiftUI
 
 struct FeedView: View {
     @StateObject var viewModel = FeedViewModel()
-    
-    
+
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: true) {
@@ -19,7 +18,7 @@ struct FeedView: View {
                         ThreadCell(thread: thread)
                     }
                 }
-              
+
             }
             .refreshable {
                 Task {
@@ -32,7 +31,7 @@ struct FeedView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    
+
                 }, label: {
                     Image(systemName: "arrow.counterclockwise")
                         .foregroundColor(.black)
@@ -44,7 +43,7 @@ struct FeedView: View {
 }
 
 #Preview {
-    NavigationStack{
+    NavigationStack {
         FeedView()
     }
 }

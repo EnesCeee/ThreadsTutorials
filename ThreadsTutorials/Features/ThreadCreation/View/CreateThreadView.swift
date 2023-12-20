@@ -11,27 +11,27 @@ struct CreateThreadView: View {
     @StateObject private var viewModel = CreateThreadViewModel()
     @State private var caption = ""
     @Environment(\.dismiss) private var dismiss
-    
-    private var user : UserModel?{
+
+    private var user: UserModel? {
         return UserService.shared.currentUser
     }
-    
+
     var body: some View {
         NavigationStack {
-            VStack{
-                HStack(alignment: .top){
+            VStack {
+                HStack(alignment: .top) {
                     CircularProfileImageView(user: user, size: .small)
-                    VStack(alignment: .leading, spacing: 4){
+                    VStack(alignment: .leading, spacing: 4) {
                         Text(user?.username ?? "")
                             .fontWeight(.semibold)
-                        
+
                         TextField("Start a thread...", text: $caption, axis: .vertical)
                     }
                     .font(.footnote)
-                    
+
                     Spacer()
-                    
-                    if !caption.isEmpty{
+
+                    if !caption.isEmpty {
                         Button(action: {
                             caption = ""
                         }, label: {
@@ -47,7 +47,7 @@ struct CreateThreadView: View {
             .padding()
             .navigationTitle("New Thread")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
+            .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
                         dismiss()
@@ -59,7 +59,7 @@ struct CreateThreadView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        Task{try await viewModel.uploadThread(caption: caption)
+                        Task {try await viewModel.uploadThread(caption: caption)
                             dismiss()
                         }
                     }, label: {

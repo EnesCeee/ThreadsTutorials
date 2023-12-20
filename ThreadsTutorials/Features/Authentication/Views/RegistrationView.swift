@@ -12,7 +12,6 @@ struct RegistrationView: View {
 
     @Environment(\.dismiss) var dismiss
 
-    
     var body: some View {
         VStack {
             Spacer()
@@ -20,8 +19,7 @@ struct RegistrationView: View {
                 .resizable()
                 .frame(width: 120, height: 120)
                 .padding()
-            VStack
-            {
+            VStack {
                 TextField("Enter your email", text: $viewModel.email)
                     .modifier(ThreadsTextFieldModifier())
 
@@ -35,9 +33,9 @@ struct RegistrationView: View {
                     .modifier(ThreadsTextFieldModifier())
 
             }.padding()
-            
+
             Button(action: {
-                Task{try await viewModel.createUser()}
+                Task {try await viewModel.createUser()}
             }, label: {
                 Text("Sign Up")
                     .frame(maxWidth: .infinity, minHeight: 50)
@@ -49,10 +47,10 @@ struct RegistrationView: View {
             })
             Spacer()
             Divider()
-            Button{
+            Button {
                 dismiss()
             } label: {
-                
+
                 HStack(spacing: 3) {
                     Text("Already have an account?")
                     Text(" Sign in")
@@ -60,12 +58,10 @@ struct RegistrationView: View {
                 .foregroundColor(.black)
                 .font(.footnote)
             }.padding(.vertical, 16)
-           
+
             }
         }
     }
-
-
 
 #Preview {
     RegistrationView()

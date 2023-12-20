@@ -16,12 +16,11 @@ class EditProfileViewModel: ObservableObject {
     }
     @Published var profileImage: Image?
     private var uiImage: UIImage?
-    
-    
-    func updateUserData() async throws{
+
+    func updateUserData() async throws {
         try await updateProfileImage()
     }
-    
+
     @MainActor
     private func loadImage() async {
         guard let item = selectedItem else { return }
@@ -30,12 +29,11 @@ class EditProfileViewModel: ObservableObject {
         self.uiImage = uiImage
         self.profileImage = Image(uiImage: uiImage)
     }
-    
+
     @MainActor
     private func updateProfileImage() async throws {
         guard let image = self.uiImage else { return }
-        guard let imageUrl = try? await ImageUploader.uploadImage(image) else{return}
+        guard let imageUrl = try? await ImageUploader.uploadImage(image) else {return}
         try await UserService.shared.updateUserProfileImage(withImageUrl: imageUrl)
     }
 }
-

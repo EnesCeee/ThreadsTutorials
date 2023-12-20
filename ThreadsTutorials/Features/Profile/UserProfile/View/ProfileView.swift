@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ProfileView: View {
     let user: UserModel
-   
-    
+
     var body: some View {
         ScrollView(showsIndicators: false) {
-            //bio and stats
+            // bio and stats
             VStack(spacing: 20) {
                 ProfileHeaderView(user: user)
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
@@ -25,13 +24,13 @@ struct ProfileView: View {
                         .background(.black)
                         .cornerRadius(8)
                 })
-                
-                //user content list view
+
+                // user content list view
                 UserContentListView(user: user)
-                
+
             }
         }
-        .toolbar{
+        .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     AuthService.shared.signOut()
@@ -43,7 +42,7 @@ struct ProfileView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.horizontal)
-        
+
     }
 }
 

@@ -8,21 +8,24 @@
 import Foundation
 
 @MainActor
-class FeedViewModel: ObservableObject{
+class FeedViewModel: ObservableObject {
 
     @Published var threads = [ThreadModel]()
-    
+
+    var threadService: IThreadService
+
     init() {
+        self.threadService = ThreadService()
         Task {
             try await fetchThreads()
         }
     }
-    
+
     func fetchThreads() async throws {
-        self.threads = try await ThreadService.fetchThreads()
+        self.threads = try await threadService.fetchThreads()
         try await fetchUserDataForThread()
     }
-    
+
     private func fetchUserDataForThread() async throws {
         for i in 0 ..< threads.count {
             let thread = threads[i]

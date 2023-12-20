@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ThreadsTabView: View {
-    @State private var selectedTab = 0
+    @State private var selectedTab = 1
     @State private var showCreateThreadView = false
-    
+
     var body: some View {
-        TabView{
+        TabView {
             ForEach(HomeTabItem.tabItems) { item in
                 item.page.tabItem {
-                    TabIconLabel(model: item.model , id: item.model.id, selectedTab: $selectedTab)
+                    TabIconLabel(model: item.model, id: item.model.id, selectedTab: $selectedTab)
                 }
-                .onAppear{selectedTab = item.model.id}
+                .onAppear {selectedTab = item.model.id}
                 .tag(item.model.id)
             }
         }
@@ -26,6 +26,7 @@ struct ThreadsTabView: View {
         }
         .sheet(isPresented: $showCreateThreadView, onDismiss: {
             selectedTab = 0
+            print("")
         }, content: {
             CreateThreadView()
         })
@@ -41,14 +42,11 @@ private struct TabIconLabel: View {
     let model: TabModel
     let id: Int
     @Binding var selectedTab: Int
-    
+
     var body: some View {
         VStack {
             Image(systemName: model.icon.rawValue)
         }
-        
+
     }
 }
-
-
-

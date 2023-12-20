@@ -10,15 +10,15 @@ import SwiftUI
 struct CurrentUserProfileView: View {
     @StateObject private var viewModel = CurrentProfileViewModel()
     @State private var showEditProfile = false
-    
-    private var currentUser: UserModel?{
+
+    private var currentUser: UserModel? {
         return viewModel.currentUser
     }
-    
+
     var body: some View {
             NavigationStack {
                 ScrollView(showsIndicators: false) {
-                    //bio and stats
+                    // bio and stats
                     VStack(spacing: 20) {
                         ProfileHeaderView(user: currentUser)
                         Button(action: {
@@ -34,20 +34,20 @@ struct CurrentUserProfileView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color(.systemGray4), lineWidth: 1))
                         })
-                        
-                        //user content list view
-                        if let user = currentUser{
+
+                        // user content list view
+                        if let user = currentUser {
                             UserContentListView(user: user)
                         }
 
                     }
                 }
                 .sheet(isPresented: $showEditProfile, content: {
-                    if let user = currentUser{
+                    if let user = currentUser {
                         EditProfileView(user: user)
                     }
                 })
-                .toolbar{
+                .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
                             AuthService.shared.signOut()
@@ -58,7 +58,6 @@ struct CurrentUserProfileView: View {
                     }
                 }
                 .padding(.horizontal)
-            
 
         }
     }

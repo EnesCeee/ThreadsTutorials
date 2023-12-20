@@ -14,10 +14,10 @@ struct ThreadModel: Identifiable, Codable {
     let caption: String
     let timestamp: Timestamp
     var likes: Int
-    
+
     var id: String {
         return threadId ?? UUID().uuidString
     }
-    
+
     var user: UserModel?
 }

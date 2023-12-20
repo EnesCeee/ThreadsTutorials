@@ -8,8 +8,8 @@
 import Foundation
 import Firebase
 
-extension Timestamp{
-    func timestampString() -> String{
+extension Timestamp {
+    func timestampString() -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
         formatter.maximumUnitCount = 1

@@ -9,27 +9,34 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct ThreadService {
-    static func uploadThread(_ threadModel: ThreadModel) async throws {
-        
+protocol IThreadService {
+    func uploadThread(_ threadModel: ThreadModel) async throws
+    func fetchThreads() async throws -> [ThreadModel]
+    func fetchUserThreads(uid: String) async throws -> [ThreadModel]
+}
+
+struct ThreadService: IThreadService {
+
+    func uploadThread(_ threadModel: ThreadModel) async throws {
+
         guard let threadData = try? Firestore.Encoder().encode(threadModel) else {return}
-        try await Firestore.firestore().collection("threads").addDocument(data: threadData)
+        try await Firestore.firestore().collection(Collections.threads.rawValue).addDocument(data: threadData)
     }
-    
-    static func fetchThreads () async throws -> [ThreadModel] {
+
+    func fetchThreads () async throws -> [ThreadModel] {
         let snapshot = try await Firestore
             .firestore()
-            .collection("threads")
+            .collection(Collections.threads.rawValue)
             .order(by: "timestamp", descending: true)
             .getDocuments()
         let threads = try snapshot.documents.compactMap({try $0.data(as: ThreadModel.self)})
         return threads
     }
-    
-    static func fetchUserThreads(uid: String) async throws -> [ThreadModel] {
+
+    func fetchUserThreads(uid: String) async throws -> [ThreadModel] {
         let snapshot = try await Firestore
             .firestore()
-            .collection("threads")
+            .collection(Collections.threads.rawValue)
             .whereField("ownerUid", isEqualTo: uid)
             .getDocuments()
         let threads = try snapshot.documents.compactMap({try $0.data(as: ThreadModel.self)})

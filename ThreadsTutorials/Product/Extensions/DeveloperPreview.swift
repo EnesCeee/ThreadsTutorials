@@ -13,10 +13,10 @@ extension PreviewProvider {
     }
 }
 
-class DeveloperPreview{
+class DeveloperPreview {
     static let shraed = DeveloperPreview()
-    
+
     let user = UserModel(id: NSUUID().uuidString, fullname: "Enes Ceylan", email: "ceylanenes@example.com", username: "enesceylan")
-    
+
     let thread = ThreadModel(ownerUid: "123", caption: "This is a test thread", timestamp: Timestamp(), likes: 0)
 }

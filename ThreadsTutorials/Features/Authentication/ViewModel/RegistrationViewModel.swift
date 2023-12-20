@@ -7,15 +7,21 @@
 
 import Foundation
 
-class RegistrationViewModel: ObservableObject{
+class RegistrationViewModel: ObservableObject {
     @Published  var email = ""
     @Published  var password = ""
     @Published  var fullname = ""
     @Published  var username = ""
-    
+
+    var registerService: IAuthService
+
+    init() {
+        self.registerService = AuthService()
+    }
+
     @MainActor
     func createUser() async throws {
-        try await AuthService.shared.createUser(
+        try await registerService.createUser(
             withEmail: email,
             password: password,
             fullname: fullname,

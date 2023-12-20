@@ -10,13 +10,13 @@ import SwiftUI
 struct ExploreView: View {
     @State private var searchText: String = ""
     @StateObject private var viewModel = ExploreViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: true) {
                 LazyVStack(alignment: .leading) {
                     ForEach(viewModel.users) { user in
-                        NavigationLink(value : user) {
+                        NavigationLink(value: user) {
                             VStack {
                                 UserCell(user: user)
                                 Divider()

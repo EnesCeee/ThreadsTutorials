@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
-    
+
     var body: some View {
-        Group{
+        Group {
             if viewModel.userSession != nil {
                 ThreadsTabView()
             } else {

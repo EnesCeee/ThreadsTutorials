@@ -7,23 +7,25 @@
 
 import Foundation
 
-class UserContentViewModel : ObservableObject{
+class UserContentViewModel: ObservableObject {
     @Published var threads = [ThreadModel]()
-    
+
     let user: UserModel
-    
+    var threadService: IThreadService
+
     init(user: UserModel) {
+        self.threadService = ThreadService()
         self.user = user
-        Task{
+        Task {
             try await fetchUserThreads()
         }
     }
-    
+
     @MainActor
-    func fetchUserThreads() async throws{
-       var threads = try await ThreadService.fetchUserThreads(uid: user.id)
-        
-        for i in 0 ..< threads.count{
+    func fetchUserThreads() async throws {
+       var threads = try await threadService.fetchUserThreads(uid: user.id)
+
+        for i in 0 ..< threads.count {
             threads[i].user = self.user
         }
         self.threads = threads

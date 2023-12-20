@@ -11,16 +11,15 @@ import Kingfisher
 struct CircularProfileImageView: View {
     var user: UserModel?
     let size: ProfileImageSize
-    
-    
+
     var body: some View {
         if let imageUrl = user?.profileImageUrl {
             KFImage(URL(string: imageUrl))
                 .resizable()
                 .scaledToFill()
-                .frame(width: size.dimension , height: size.dimension)
+                .frame(width: size.dimension, height: size.dimension)
                 .clipShape(Circle())
-        } else{
+        } else {
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .frame(width: size.dimension, height: size.dimension)

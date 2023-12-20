@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThreadCell: View {
     let thread: ThreadModel
-    
+
     var body: some View {
         VStack {
             HStack(alignment: .top, spacing: 12) {
@@ -24,7 +24,7 @@ struct ThreadCell: View {
                         Text(thread.timestamp.timestampString())
                             .font(.caption)
                             .foregroundColor(Color(.systemGray))
-                        
+
                         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(Color(.darkGray))
@@ -32,7 +32,7 @@ struct ThreadCell: View {
                     }
                     Text(thread.caption)
                         .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-                    
+
                     HStack(spacing: 16) {
                         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                             Image(systemName: "heart")
@@ -50,7 +50,7 @@ struct ThreadCell: View {
                             Image(systemName: "paperplane")
                                 .foregroundColor(Color(.darkGray))
                         })
-                
+
                     }
                     .foregroundColor(.black)
                     .padding(.vertical, 8)

@@ -11,16 +11,16 @@ struct UserContentListView: View {
     @StateObject private var viewModel: UserContentViewModel
     @State private var selectedFilter: ProfileThreadFilter = .threads
     @Namespace var animation
-    
-    private var filterBarWidth: CGFloat{
+
+    private var filterBarWidth: CGFloat {
         let count = CGFloat(ProfileThreadFilter.allCases.count)
         return (UIScreen.main.bounds.width ) / count - 16
     }
-    
+
     init(user: UserModel) {
         self._viewModel = StateObject(wrappedValue: UserContentViewModel(user: user))
     }
-        
+
     var body: some View {
         VStack {
             HStack {
@@ -29,14 +29,13 @@ struct UserContentListView: View {
                         Text(filter.title)
                             .font(.subheadline)
                             .fontWeight(selectedFilter == filter ? .semibold: .regular)
-                        
-                        if(selectedFilter == filter){
+
+                        if selectedFilter == filter {
                             Rectangle()
                                 .foregroundStyle(.black)
                                 .frame(width: filterBarWidth, height: 1)
                                 .matchedGeometryEffect(id: "item", in: animation)
-                        }
-                        else{
+                        } else {
                             Rectangle()
                                 .foregroundStyle(.clear)
                                 .frame(width: filterBarWidth, height: 1)
@@ -47,7 +46,7 @@ struct UserContentListView: View {
                             selectedFilter = filter
                         }
                     }
-                   
+
                 }
             }
             LazyVStack(spacing: 20) {

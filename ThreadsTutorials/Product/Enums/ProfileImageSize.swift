@@ -14,8 +14,7 @@ enum ProfileImageSize {
     case medium
     case large
     case xLarge
-    
-    
+
     var dimension: CGFloat {
         switch self {
         case .xxSmall:
@@ -32,5 +31,5 @@ enum ProfileImageSize {
             return 80
         }
     }
-    
+
 }
